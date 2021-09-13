@@ -1,16 +1,12 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
+/* 
+  * Custom font I like <Inter>
+  ? The Figma Design uses SF Pro so <Inter Font> will not be used
+*/
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
-}
+/*
+  * Tailwind Setup 
+*/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
