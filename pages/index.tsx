@@ -1,11 +1,25 @@
-import { ApolloClient, gql, InMemoryCache } from "@apollo/client";
-import { GetStaticProps, NextPageContext } from "next";
+import { useQuery } from "@apollo/client";
+import { GetStaticProps } from "next";
 import Head from "next/head";
-import Image from "next/image";
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
+import { InitialPeople } from "../components/PeopleOverview";
+import { client } from "../graphql/client";
+import {
+  GET_INITIAL_PEOPLE,
+  GET_PEOPLE_DETAILS,
+} from "../graphql/queries/getInitialPeople";
 
 export default function Home({ peopleData }): ReactElement {
   console.log(peopleData);
+
+  // TODO Future testing will define getStaticPaths or other dynamic data fetching
+
+  const { error, data, loading } = useQuery(GET_PEOPLE_DETAILS, {
+    client: client,
+  });
+
+  console.log(data);
+
   return (
     <>
       <Head>
@@ -14,18 +28,20 @@ export default function Home({ peopleData }): ReactElement {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1 className="font-bold text-2xl bg-black text-white p-4">
-        Ravn Star Wars Registry
-      </h1>
+      <header className="bg-ravn-black text-white py-4 px-10">
+        <h1 className="font-bold text-2xl ">Ravn Star Wars Registry</h1>
+      </header>
 
-      <main className="flex flex-col">
-        <div>
-          {peopleData.map((p) => (
-            <div key={p.id}>
-              <li>{p.name}</li>
+      <main className="flex">
+        {/* //* Assumed the expected element's responsive width */}
+        <div className="border-r-2 h-screen w-full sm:max-w-[50%] md:max-w-[30%]">
+          {peopleData.map((r) => (
+            <div key={r.id} className="hover:bg-gray-100 cursor-pointer">
+              <InitialPeople peopleData={r} />
             </div>
           ))}
         </div>
+        <div className="hidden sm:block">{/* Details Page */}</div>
       </main>
     </>
   );
@@ -35,27 +51,17 @@ export default function Home({ peopleData }): ReactElement {
   * Using NextJs built-in functionality data-fetching
   ? Next requires this function to be on the same page as where the data will be used
 */
-export const getStaticProps: GetStaticProps = async (ctx) => {
-  const client = new ApolloClient({
-    uri: "https://swapi-graphql.netlify.app/.netlify/functions/index/",
-    cache: new InMemoryCache(),
+
+export const getStaticProps: GetStaticProps = async () => {
+  // * Getting the first 5 people to be already rendered beforehand
+  const { data } = await client.query({
+    query: GET_INITIAL_PEOPLE,
   });
 
-  // * Getting the first 5 people
-  const { data } = await client.query({
-    query: gql`
-      query allPeople {
-        allPeople(first: 5) {
-          people {
-            name
-            eyeColor
-            birthYear
-            id
-          }
-        }
-      }
-    `,
-  });
+  if (!data)
+    return {
+      notFound: true,
+    };
 
   return {
     props: {
