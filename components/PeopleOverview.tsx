@@ -13,7 +13,7 @@ interface Props {
 export const InitialPeople: FC<Props> = ({ peopleData }) => {
   return (
     <Link href={"/"} passHref>
-      <div className="flex items-center justify-between gap-4 m-2 border-b-2 p-2 group">
+      <div className="flex items-center justify-between gap-4 border-b-2 p-3 group">
         <ul className="flex flex-col">
           <li className="text-lg">{peopleData.name}</li>
           <li className="text-sm text-light-text">
