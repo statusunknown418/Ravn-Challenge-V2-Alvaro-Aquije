@@ -12,6 +12,7 @@ module.exports = {
         "ravn-black": "#121212",
         "light-text": "#828282",
         "darker-text": "#333333",
+        "ravn-error-red": "#EC5757",
       },
     },
   },
