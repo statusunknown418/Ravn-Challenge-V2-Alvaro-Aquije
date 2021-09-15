@@ -22,7 +22,7 @@ This project was made in order to complete the second phase of the recruitment/s
 
 ## Working app
 
-Screenshots
+![Working App](https://media.giphy.com/media/FLAalKNkRknb8jzUdj/giphy.gif)
 
 ## Technologies used
 
@@ -34,4 +34,5 @@ Screenshots
 ## Extra Features
 
 - This project is currently deployed on Vercel: [latest_production_website](https://ravn-challenge-v2-alvaro-aquije.vercel.app/)
+
 - Planned: Add animations while on mobile screen size to show the characters details page.
