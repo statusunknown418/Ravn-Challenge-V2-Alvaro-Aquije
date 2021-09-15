@@ -22,7 +22,7 @@ This project was made in order to complete the second phase of the recruitment/s
 
 ## Working app
 
-![Working App](https://media.giphy.com/media/FLAalKNkRknb8jzUdj/giphy.gif)
+![Working App](https://media.giphy.com/media/vttCqFAkxgkFsEKvnn/giphy.gif)
 
 ## Technologies used
 
