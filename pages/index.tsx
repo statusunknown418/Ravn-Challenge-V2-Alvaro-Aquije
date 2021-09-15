@@ -1,25 +1,38 @@
 import { useQuery } from "@apollo/client";
 import { GetStaticProps } from "next";
 import Head from "next/head";
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useContext } from "react";
+import { ErrorBanner } from "../components/ErrorBanner";
+import { LoadingSpinner } from "../components/LoadingSpinner";
+import { PeopleData } from "../components/PeopleData";
 import { InitialPeople } from "../components/PeopleOverview";
 import { client } from "../graphql/client";
 import {
   GET_INITIAL_PEOPLE,
+  GET_ALL_PEOPLE,
   GET_PEOPLE_DETAILS,
-} from "../graphql/queries/getInitialPeople";
+} from "../graphql/queries/peopleCommonQueries";
 
 export default function Home({ peopleData }): ReactElement {
-  console.log(peopleData);
-
-  // TODO Future testing will define getStaticPaths or other dynamic data fetching
-
-  const { error, data, loading } = useQuery(GET_PEOPLE_DETAILS, {
+  /*
+   * This query will get all the extra people
+   */
+  const { error, data, loading } = useQuery(GET_ALL_PEOPLE, {
     client: client,
   });
 
-  console.log(data);
+  /*
+   * Fetching the data here will allow the web to process only 2 main requests every time it's rendered
+   */
+  const {
+    data: generalData,
+    loading: secQueryLoading,
+    error: secQueryError,
+  } = useQuery(GET_PEOPLE_DETAILS, {
+    client: client,
+  });
 
+  console.log(generalData);
   return (
     <>
       <Head>
@@ -34,14 +47,36 @@ export default function Home({ peopleData }): ReactElement {
 
       <main className="flex">
         {/* //* Assumed the expected element's responsive width */}
-        <div className="border-r-2 h-screen w-full sm:max-w-[50%] md:max-w-[30%]">
+        <div className="border-r-2 w-full sm:max-w-[50%] md:max-w-[30%]">
           {peopleData.map((r) => (
-            <div key={r.id} className="hover:bg-gray-100 cursor-pointer">
+            <div key={r.id}>
               <InitialPeople peopleData={r} />
             </div>
           ))}
+
+          {/* //* Show the loading spinner (while awaiting data) */}
+          {loading && <LoadingSpinner />}
+
+          {/* //* Show the error message (if the query fails) */}
+          {error && <ErrorBanner />}
+
+          {/* //* Only show the data when it's defined and was successfully fetched */}
+          {!loading &&
+            data.allPeople.people.map((p) => (
+              <div key={p.id}>
+                <InitialPeople peopleData={p} />
+              </div>
+            ))}
         </div>
-        <div className="hidden sm:block">{/* Details Page */}</div>
+        <div className="hidden sm:block sm:w-full">
+          {!secQueryLoading && (
+            <PeopleData
+              allPeopleDetails={generalData.allPeople.people}
+              loading={secQueryLoading}
+              error={secQueryLoading}
+            />
+          )}
+        </div>
       </main>
     </>
   );
