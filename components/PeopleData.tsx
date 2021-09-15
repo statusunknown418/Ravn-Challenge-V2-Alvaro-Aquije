@@ -73,11 +73,14 @@ export const PeopleData: FC<Props> = ({ allPeopleDetails }) => {
    * context provides
    */
   const specificCharacter = allPeopleDetails.filter((p) => p.id === personId);
-  console.log(specificCharacter);
   return (
     //* Validations
-    <div className="px-10 py-5">
-      {personId === null && <h2>Please select a character to continue</h2>}
+    <div className="px-5 md:px-10 py-5">
+      {personId === null && (
+        <h2 className="text-center text-xl font-bold text-light-text mt-[35%]">
+          Please select a character to view its details
+        </h2>
+      )}
       {personId !== null && (
         <MainDetailsComponent specificPerson={specificCharacter[0]} />
       )}

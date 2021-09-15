@@ -16,13 +16,15 @@ import {
 export default function Home({ peopleData }): ReactElement {
   /*
    * This query will get all the extra people
+    ? If you are using VsCode place the cursor over GET_ALL_PEOPLE and 
+    ? modify anything to test what a failed request would look like
    */
   const { error, data, loading } = useQuery(GET_ALL_PEOPLE, {
     client: client,
   });
 
   /*
-   * Fetching the data here will allow the web to process only 2 main requests every time it's rendered
+   * Fetching the data here will allow the app to process only 2 main requests every time it's rendered
    */
   const {
     data: generalData,
@@ -46,7 +48,7 @@ export default function Home({ peopleData }): ReactElement {
 
       <main className="flex">
         {/* //* Assumed the expected element's responsive width */}
-        <div className="border-r-2 w-full sm:max-w-[50%] md:max-w-[30%]">
+        <div className="border-r-2 min-h-screen w-full sm:max-w-[50%] md:max-w-[30%]">
           {peopleData.map((r) => (
             <div key={r.id}>
               <InitialPeople peopleData={r} />
@@ -61,6 +63,7 @@ export default function Home({ peopleData }): ReactElement {
 
           {/* //* Only show the data when it's defined and was successfully fetched */}
           {!loading &&
+            !error &&
             data.allPeople.people.map((p) => (
               <div key={p.id}>
                 <InitialPeople peopleData={p} />
@@ -68,7 +71,7 @@ export default function Home({ peopleData }): ReactElement {
             ))}
         </div>
         <div className="hidden sm:block sm:w-full">
-          {!secQueryLoading && (
+          {!secQueryLoading && !secQueryError && (
             <PeopleData
               allPeopleDetails={generalData.allPeople.people}
               loading={secQueryLoading}
@@ -87,7 +90,6 @@ export default function Home({ peopleData }): ReactElement {
 */
 
 export const getStaticProps: GetStaticProps = async () => {
-  // * Getting the first 5 people to be already rendered beforehand
   const { data } = await client.query({
     query: GET_INITIAL_PEOPLE,
   });
