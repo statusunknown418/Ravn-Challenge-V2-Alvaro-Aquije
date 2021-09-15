@@ -4,7 +4,7 @@ type Props = {};
 
 export const LoadingSpinner: FC<Props> = () => {
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center justify-center mt-3">
       <div className={styles.spinner}>
         <div className={styles.bar1}></div>
         <div className={styles.bar2}></div>
