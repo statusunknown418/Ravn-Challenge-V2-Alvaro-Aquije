@@ -1,0 +1,3 @@
+.clampedMargin {
+  margin-top: clamp(5rem, 35%, 16rem);
+}
