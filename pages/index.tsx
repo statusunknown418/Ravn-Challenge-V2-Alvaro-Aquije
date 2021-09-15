@@ -1,7 +1,8 @@
 import { useQuery } from "@apollo/client";
+import { AnimatePresence, motion } from "framer-motion";
 import { GetStaticProps } from "next";
 import Head from "next/head";
-import { ReactElement, useContext } from "react";
+import { ReactElement, useContext, useState } from "react";
 import { ErrorBanner } from "../components/ErrorBanner";
 import { LoadingSpinner } from "../components/LoadingSpinner";
 import { PeopleData } from "../components/PeopleData";
@@ -48,7 +49,7 @@ export default function Home({ peopleData }): ReactElement {
 
       <main className="flex">
         {/* //* Assumed the expected element's responsive width */}
-        <div className="border-r-2 min-h-screen w-full sm:max-w-[50%] md:max-w-[30%]">
+        <div className="border-r-2 min-h-screen w-full sm:max-w-[40%] md:max-w-[30%]">
           {peopleData.map((r) => (
             <div key={r.id}>
               <InitialPeople peopleData={r} />
@@ -70,15 +71,22 @@ export default function Home({ peopleData }): ReactElement {
               </div>
             ))}
         </div>
-        <div className="hidden sm:block sm:w-full">
-          {!secQueryLoading && !secQueryError && (
-            <PeopleData
-              allPeopleDetails={generalData.allPeople.people}
-              loading={secQueryLoading}
-              error={secQueryLoading}
-            />
-          )}
-        </div>
+        {!secQueryLoading && !secQueryError && (
+          <AnimatePresence>
+            <motion.div
+              className="hidden sm:block sm:w-full"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <PeopleData
+                allPeopleDetails={generalData.allPeople.people}
+                loading={secQueryLoading}
+                error={secQueryLoading}
+              />
+            </motion.div>
+          </AnimatePresence>
+        )}
       </main>
     </>
   );

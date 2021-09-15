@@ -1,7 +1,7 @@
 import { FC, useContext } from "react";
 import { IdContext } from "../context/IdContext";
 import { PersonDetails } from "../interfaces/CommonInterfaces";
-
+import styles from "../styles/peopleData.module.css";
 // ? I split the validation and the details component just to make the file easier to read
 type Props = {
   allPeopleDetails: PersonDetails[];
@@ -77,7 +77,9 @@ export const PeopleData: FC<Props> = ({ allPeopleDetails }) => {
     //* Validations
     <div className="px-5 md:px-10 py-5">
       {personId === null && (
-        <h2 className="text-center text-xl font-bold text-light-text mt-[35%]">
+        <h2
+          className={`text-center text-xl font-bold text-light-text ${styles.clampedMargin}`}
+        >
           Please select a character to view its details
         </h2>
       )}
