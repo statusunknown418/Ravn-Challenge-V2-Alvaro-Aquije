@@ -10,3 +10,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .h2-low-emphasis {
+    @apply text-[#828282] font-bold py-3;
+  }
+  .common-flex {
+    @apply border-b-2 flex items-center justify-between list-none;
+  }
+}
