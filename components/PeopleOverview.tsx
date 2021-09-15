@@ -1,11 +1,7 @@
 import { FC, useContext } from "react";
 import Image from "next/image";
 import { PeopleOverview } from "../interfaces/CommonInterfaces";
-import Link from "next/link";
 import { IdContext } from "../context/IdContext";
-import { useQuery } from "@apollo/client";
-import { GET_PEOPLE_DETAILS } from "../graphql/queries/peopleCommonQueries";
-import { client } from "../graphql/client";
 
 // * Using Types and Interfaces is useful for autocompletion and code error checking
 // TODO Finish styling here

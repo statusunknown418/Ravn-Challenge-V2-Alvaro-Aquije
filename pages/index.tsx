@@ -2,17 +2,15 @@ import { useQuery } from "@apollo/client";
 import { AnimatePresence, motion } from "framer-motion";
 import { GetStaticProps } from "next";
 import Head from "next/head";
-import { ReactElement, useContext, useState } from "react";
+import { ReactElement } from "react";
 import { ErrorBanner } from "../components/ErrorBanner";
 import { LoadingSpinner } from "../components/LoadingSpinner";
 import { PeopleData } from "../components/PeopleData";
 import { InitialPeople } from "../components/PeopleOverview";
 import { client } from "../graphql/client";
-import {
-  GET_INITIAL_PEOPLE,
-  GET_ALL_PEOPLE,
-  GET_PEOPLE_DETAILS,
-} from "../graphql/queries/peopleCommonQueries";
+import { GET_ALL_PEOPLE } from "../graphql/queries/getAllPeople";
+import { GET_INITIAL_PEOPLE } from "../graphql/queries/getInitialPeople";
+import { GET_PEOPLE_DETAILS } from "../graphql/queries/getPeopleDetails";
 
 export default function Home({ peopleData }): ReactElement {
   /*
