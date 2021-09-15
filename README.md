@@ -30,9 +30,10 @@ This project was made in order to complete the second phase of the recruitment/s
 - Typescript
 - GraphQL -> Apollo Client
 - TailwindCSS (fast development)
+- Framer Motion
 
 ## Extra Features
 
 - This project is currently deployed on Vercel: [latest_production_website](https://ravn-challenge-v2-alvaro-aquije.vercel.app/)
 
-- Planned: Add animations while on mobile screen size to show the characters details page.
+- Small animations/transitions to make the web more dynamic
