@@ -19,9 +19,11 @@ export interface PersonDetails extends PeopleOverview {
   hairColor: string;
   skinColor: string;
   birthYear: string;
-  vehicle?: {
-    name: string;
-    id: Key;
-    model: string;
-  }[];
+  vehicleConnection?: {
+    vehicles?: {
+      name: string;
+      id: Key;
+      model: string;
+    }[];
+  };
 }
