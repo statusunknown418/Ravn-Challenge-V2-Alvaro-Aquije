@@ -32,7 +32,6 @@ export default function Home({ peopleData }): ReactElement {
     client: client,
   });
 
-  console.log(generalData);
   return (
     <>
       <Head>
