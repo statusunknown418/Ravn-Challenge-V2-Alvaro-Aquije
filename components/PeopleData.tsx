@@ -56,7 +56,7 @@ const MainDetailsComponent: FC<SecondaryProps> = ({ specificPerson }) => {
           </div>
         ))
       ) : (
-        <h2 className="font-bold text-red-600">
+        <h2 className="font-bold text-ravn-error-red">
           This character doesn't have any vehicles!
         </h2>
       )}
