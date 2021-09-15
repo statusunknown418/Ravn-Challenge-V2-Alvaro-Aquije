@@ -32,7 +32,7 @@ export default function Home({ peopleData }): ReactElement {
   } = useQuery(GET_PEOPLE_DETAILS, {
     client: client,
   });
-
+  console.log(generalData);
   return (
     <>
       <Head>
@@ -63,7 +63,7 @@ export default function Home({ peopleData }): ReactElement {
           {/* //* Only show the data when it's defined and was successfully fetched */}
           {!loading &&
             !error &&
-            data.allPeople.people.map((p) => (
+            data.allPeople.people.slice(5).map((p) => (
               <div key={p.id}>
                 <InitialPeople peopleData={p} />
               </div>
