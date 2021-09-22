@@ -75,7 +75,7 @@ export const PeopleData: FC<Props> = ({ allPeopleDetails }) => {
   const specificCharacter = allPeopleDetails.filter((p) => p.id === personId);
   return (
     //* Validations
-    <div className="px-5 md:px-10 py-5">
+    <div className="px-5 md:px-10 py-5 sticky inset-0">
       {personId === null && (
         <h2
           className={`text-center text-xl font-bold text-light-text ${styles.clampedMargin}`}

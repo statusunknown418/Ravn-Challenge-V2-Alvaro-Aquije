@@ -29,7 +29,7 @@ export const InitialPeople: FC<Props> = ({ peopleData }) => {
           </li>
         </ul>
         <span>
-          <Image width={15} height={15} src="/assets/VectorIcon.svg" />
+          <Image width={15} height={15} src="/assets/VectorIcon.svg" alt="" />
         </span>
       </div>
     </div>
