@@ -47,7 +47,7 @@ export default function Home({ peopleData }): ReactElement {
 
       <main className="flex">
         {/* //* Assumed the expected element's responsive width */}
-        <div className="border-r-2 min-h-screen w-full sm:max-w-[40%] md:max-w-[30%]">
+        <div className="border-r-2 h-[93vh] overflow-y-scroll scrollbar scrollbar-thumb-gray-800 scrollbar-thin scrollbar-track-gray-200 hover:scrollbar-thumb-gray-500   w-full sm:max-w-[40%] md:max-w-[30%]">
           {peopleData.map((r) => (
             <div key={r.id}>
               <InitialPeople peopleData={r} />
